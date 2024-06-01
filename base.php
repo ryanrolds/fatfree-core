@@ -2823,10 +2823,10 @@ class Cache extends Prefab {
 		if ($dsn=trim($dsn)) {
 			if (preg_match('/^redis=(.+)/',$dsn,$parts) &&
 				extension_loaded('redis')) {
-				list($host,$port,$db,$password,$username,$tls)=explode(':',$parts[1])+[1=>6379,2=>NULL,3=>NULL,4=>NULL,5=>false];
+				list($host,$port,$db,$password,$username,$tls)=explode(':',$parts[1])+[1=>6379,2=>NULL,3=>NULL,4=>NULL,5=>NULL];
 				$this->ref=new Redis;
 
-				if($tls) {
+				if(!empty($tls) && $tls == "true") {
 					$host = "tls://$host";
 				}
 					
